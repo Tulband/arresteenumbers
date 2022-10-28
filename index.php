@@ -6,15 +6,16 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+$validated = false;
+
 if(isset($_POST['Submit']))
 {
     // code for check server side validation
     if(empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) != 0)
     {
-        $validated = false;
         $message = "The captcha was not correct. Please try again!";
     }
-    else // Captcha verification is Correct. Final Code Execute here!		
+    else // Captcha verification is Correct. Final Code Execute here!
     {
         $validated = true;
 
@@ -68,23 +69,29 @@ if(isset($_POST['Submit']))
         <title>Arrestee number generator</title>
         <link href="./css/style.css" rel="stylesheet">
         <script src="js/script.js"></script>
+        <script src="css/style.css"></script>
     </head>
 
     <body>
-        <div>
+        <div class='an_header'>
             <h1>Arrestee number generator</h1>
         </div>
-        <br>
+        <div class="an_whole">
+        <div class="an_message">
 
 <?php
 if (isset($_POST['Submit']))
 {
     echo $message;
 }
+?>
+        </div>
+        <div class ='an_form'>
+<?php
 if (!$validated)
 {
 ?>
-        <form action="" method="post" name="form1" id="form1" >
+        <form action="" method="post" name="an_form" id="an_form" >
             <table>
                 <tr>
                     <td>Action name (not your real name!):</td>
@@ -111,7 +118,7 @@ if (!$validated)
 <?php
 }
 ?>
-
-
+    </div>
+    </div>
     </body>
 </html>
