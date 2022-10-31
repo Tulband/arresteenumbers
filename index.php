@@ -73,9 +73,9 @@ if(isset($_POST['Submit']))
     </head>
 
     <body>
-        <div class='an_header'>
+        <!--<div class='an_header'>
             <h1>Arrestee number generator</h1>
-        </div>
+        </div> --!>
         <div class="an_whole">
         <div class="an_message">
 
@@ -94,25 +94,35 @@ if (!$validated)
         <form action="" method="post" name="an_form" id="an_form" >
             <table>
                 <tr>
-                    <td>Action name (not your real name!):</td>
+                    <td colspan='2'><h1>Arrestee number generator</h1></td>
                 </tr>
+
                 <tr>
+                    <td>Action name (not your real name!):</td>
                     <td><input type="text" name="name"></td>
                 </tr>
                 <tr>
+                    <td colspan='2' class='an_tdcenter'>
+                        <img src="captcha.php?rand=<?php echo rand();?>" id='captchaimg'><br>
+                    </td>
+                </tr>
+                <tr>
                     <td>
-                        Captcha: <img src="captcha.php?rand=<?php echo rand();?>" id='captchaimg'><br>
+                        What is the code in the image above?
+                    </td>
+                    <td>
+                        <input width='100%' id="captcha_code" name="captcha_code" type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td class='an_tdcenter' colspan='2'>
                         <i>Can't read the image? click <a href='javascript:
         refreshCaptcha();'>here</a> to refresh.</td></i>
                     </td>
-                <tr>
-                    <td>
-                        <input id="captcha_code" name="captcha_code" type="text">
-                    </td>
                 </tr>
-                </tr>
-            <br>
-            <td><input name="Submit" type="submit" onclick="return validate();" value="Submit" class="button1"></td>
+            <tr>
+                <td class='an_tdcenter' colspan='2'><input name="Submit" type="submit" onclick="return validate();" value="Request number" class="button1"></td>
+            </tr>
             </table>
         </form>
 <?php
