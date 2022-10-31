@@ -82,7 +82,14 @@ if(isset($_POST['Submit']))
 <?php
 if (isset($_POST['Submit']))
 {
-    echo $message;
+    if (!$validated)
+    {
+        echo "<div class='an_errormessage'>" . $message . "</div>";
+    }
+    else
+    {
+        echo "<div>" . $message . "</div<";
+    }
 }
 ?>
         </div>
