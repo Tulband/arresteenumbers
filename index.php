@@ -8,10 +8,10 @@ error_reporting(E_ALL);
 
 $validated = false;
 
-if(isset($_POST['Submit']))
+if (isset($_POST['Submit']))
 {
-    // code for check server side validation
-    if(empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) != 0)
+    // check the captcha
+    if (empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $_POST['captcha_code']) != 0)
     {
         $message = "The captcha was not correct. Please try again!";
     }
@@ -89,6 +89,7 @@ if (isset($_POST['Submit']))
     else
     {
         echo "<div>" . $message . "</div<";
+        header('Location: out.php?name='.$nickname.'&number='.$new_number);
     }
 }
 ?>
@@ -99,6 +100,7 @@ if (!$validated)
 {
 ?>
         <form action="" method="post" name="an_form" id="an_form" >
+            <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
             <table>
                 <tr>
                     <td colspan='2'><h1>Arrestee number generator</h1></td>
