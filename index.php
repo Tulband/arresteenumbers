@@ -48,15 +48,24 @@ if (isset($_POST['Submit']))
         $last_entry_split = explode(";", $last_entry);
         $last_number = $last_entry_split[0];
 
-        $new_number = intval($last_number) + 1;
-        $new_entry = $new_number . ";" . $nickname . ";" . date("Y-m-d H:i:s") . "\n";
+        if ($last_entry_split[1] == $nickname)
+        {
+            $message = "Something went wrong, please try again.";
+            $validated = false;
+        }
+        else
+        {
 
-        /* file_put_contents("numbers.txt", $new_entry, FILE_APPEND | LOCK_EX) || die("Unable to write to file"); */
-        fwrite($handle,$new_entry);
-        fflush($handle);
-        fclose($handle);
+            $new_number = intval($last_number) + 1;
+            $new_entry = $new_number . ";" . $nickname . ";" . date("Y-m-d H:i:s") . "\n";
 
-        $message=  "Jo " . $nickname . ", you will be number " . $new_number . ", remember this!";
+            /* file_put_contents("numbers.txt", $new_entry, FILE_APPEND | LOCK_EX) || die("Unable to write to file"); */
+            fwrite($handle,$new_entry);
+            fflush($handle);
+            fclose($handle);
+
+            $message=  "Jo " . $nickname . ", you will be number " . $new_number . ", remember this!";
+        }
     }
 }
 ?>
@@ -100,7 +109,6 @@ if (!$validated)
 {
 ?>
         <form action="" method="post" name="an_form" id="an_form" >
-            <input type="hidden" value="<?php echo $rand; ?>" name="randcheck" />
             <table>
                 <tr>
                     <td colspan='2'><h1>Arrestee number generator</h1></td>
