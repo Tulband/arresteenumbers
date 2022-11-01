@@ -55,8 +55,14 @@ if (isset($_POST['Submit']))
         }
         else
         {
-
             $new_number = intval($last_number) + 1;
+
+            // skip some numbers because they were already handed out
+            if ($new_number == 1000)
+            {
+                $new_number = 1313;
+            }
+
             $new_entry = $new_number . ";" . $nickname . ";" . date("Y-m-d H:i:s") . "\n";
 
             /* file_put_contents("numbers.txt", $new_entry, FILE_APPEND | LOCK_EX) || die("Unable to write to file"); */
